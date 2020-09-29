@@ -258,7 +258,7 @@ var obj = {
     email: undefined,
     phone: undefined
   },
-  lead_source: urlSearch.get("utm_content") == null ? "174" : (parseInt(urlSearch.get("utm_content")) == 0 ? "174" : urlSearch.get("utm_content"))
+  lead_source: urlSearch.get("utm_content")
 }
 
 function buildObj(prop, value) {
