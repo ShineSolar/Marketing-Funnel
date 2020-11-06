@@ -239,7 +239,6 @@ function validateUserProfile() {
         d="M16.056.626a1.455 1.455 0 0 0-2.035.309l-6.903 9.369-4.39-3.512A1.458 1.458 0 0 0 .907 9.067l5.573 4.459a1.472 1.472 0 0 0 2.082-.274L16.37 2.663a1.457 1.457 0 0 0-.314-2.037z" />
   </svg>`
   }
-  updateDatabase();
 }
 
 var urlSearch = new URLSearchParams(window.location.search);
