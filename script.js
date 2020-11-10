@@ -226,8 +226,8 @@ function validateUserProfile() {
     gtag("event", "question_8", {
       "event_label": "Personal Info"
     });
-    buildObj('personalInfo', {'firstName': firstName, 'lastName' : lastName, 'email' : email, 'phone' : phone})
-    
+    buildObj('personalInfo', {'firstName': firstName, 'lastName' : lastName, 'email' : email, 'phone' : phone});
+    fbq('track', 'Lead');
     document.getElementById("videoContainer").innerHTML = '<iframe allow="autoplay" src="https://player.vimeo.com/video/341475870?autoplay=1" frameborder="0"></iframe>';
     window.location = `#slider-9`;
     document.getElementById('steps').classList.add('hide');
@@ -266,7 +266,6 @@ function buildObj(prop, value) {
 }
 
 function updateDatabase() {
-  fbq('track', 'Lead');
   gtag("event", "converted");
   var server = new XMLHttpRequest();
   server.open('POST', 'https://hooks.zapier.com/hooks/catch/1681335/orq93em/silent/');
