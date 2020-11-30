@@ -1,12 +1,3 @@
-window.onbeforeunload = function (e) {
-
-  // this.console.log('User just tried closing window. Let us give him/her this confirmation message and send some data to the database');
-
-  var confirmationMessage = "Exiting! :) ";
-  (e || window.event).returnValue = confirmationMessage;
-  return confirmationMessage;
-};
-
 window.onload = function() {
   fbq('track', 'InitiateCheckout');
   location.hash = "#slider-1";
