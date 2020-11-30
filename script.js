@@ -258,7 +258,7 @@ var obj = {
     email: undefined,
     phone: undefined
   },
-  lead_source: urlSearch.get("utm_content")
+  lead_source: urlSearch.get("utm_content") // change this
 }
 
 function buildObj(prop, value) {
