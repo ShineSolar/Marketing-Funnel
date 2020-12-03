@@ -48,7 +48,7 @@ function updateUiBaseOnStep(stepNumber, stepLabel = "") {
     console.log(document.getElementById("videoContainer"));
 
   } else {
-    mainProgressBar.value = (100 / stepNumber).toString();
+    mainProgressBar.value = (100 / (stepNumber - 9)).toString();
     document.getElementById('steps').classList.remove('hide');
   }
   document.getElementsByClassName('active')[0].classList.remove('active');
