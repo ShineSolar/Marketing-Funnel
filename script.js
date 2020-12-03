@@ -3,6 +3,8 @@ window.onload = function() {
   location.hash = "#slider-1";
 }
 
+const mainProgressBar = document.querySelector("progress");
+
 function checkForStepCompletion(el, stepNumber, allowed) {
   //some business logic to check inputs here, then set allowed to true
   if (allowed) {
@@ -41,10 +43,12 @@ function updateUiBaseOnStep(stepNumber, stepLabel = "") {
   });
 
   if (stepNumber === 9) {
+    mainProgressBar.value = "100";
     document.getElementById('steps').classList.add('hide');
     console.log(document.getElementById("videoContainer"));
 
   } else {
+    mainProgressBar.value = (100 / stepNumber).toString();
     document.getElementById('steps').classList.remove('hide');
   }
   document.getElementsByClassName('active')[0].classList.remove('active');
