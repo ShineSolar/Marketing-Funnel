@@ -509,8 +509,12 @@
                     <h2>What is your address?</h2>
                     <div class="container address-box col">
                         <span class="span-responsive">Street Address</span>
-                        <input style="width: 600px;" placeholder="" id="street-address" type="search"
-                            autocomplete="off">
+                        
+                        <form autofill="off" autocomplete="off">
+                            <input style="width: 600px;" placeholder="" id="street-address" type="search"
+                                autocomplete="off">
+                        </form>
+
                         <span class="hide" style="color: #ff6900; margin-top: -13px; margin-left: 15px;"
                             id="error-address">Please, enter a valid address</span>
 
