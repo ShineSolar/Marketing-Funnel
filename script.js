@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
   fbq('track', 'InitiateCheckout');
   location.hash = "#slider-1";
 }
@@ -146,7 +146,7 @@ function validateAddress() {
     if (street === '' || street === undefined) {
       document.getElementById('error-address').classList.remove('hide');
       document.getElementById('street-address').classList.add('shakeError');
-      setTimeout(function() {
+      setTimeout(function () {
         document.getElementById('street-address').classList.remove('shakeError');
       }, 300);
     }
@@ -169,25 +169,25 @@ function validateUserProfile() {
     if (firstName === '' || firstName === undefined) {
       document.getElementById('error-first-name').classList.remove('hide');
       document.getElementById('first-name').classList.add('shakeError');
-      setTimeout(function() {
+      setTimeout(function () {
         document.getElementById('first-name').classList.remove('shakeError');
       }, 300);
     } else if (lastName === '' || lastName === undefined) {
       document.getElementById('error-last-name').classList.remove('hide');
       document.getElementById('last-name').classList.add('shakeError');
-      setTimeout(function() {
+      setTimeout(function () {
         document.getElementById('last-name').classList.remove('shakeError');
       }, 300);
     } else if (email === '' || email === undefined) {
       document.getElementById('error-email').classList.remove('hide');
       document.getElementById('email').classList.add('shakeError');
-      setTimeout(function() {
+      setTimeout(function () {
         document.getElementById('email').classList.remove('shakeError');
       }, 300);
     } else if (phone === '' || phone === undefined) {
       document.getElementById('error-phone').classList.remove('hide');
       document.getElementById('phone').classList.add('shakeError');
-      setTimeout(function() {
+      setTimeout(function () {
         document.getElementById('phone').classList.remove('shakeError');
       }, 300);
     }
@@ -196,7 +196,7 @@ function validateUserProfile() {
     if (!document.getElementById('email').checkValidity()) {
       document.getElementById('error-email').classList.remove('hide');
       document.getElementById('email').classList.add('shakeError');
-      setTimeout(function() {
+      setTimeout(function () {
         document.getElementById('email').classList.remove('shakeError');
       }, 300);
       validatedEmail = false;
@@ -208,7 +208,7 @@ function validateUserProfile() {
     if (!phone.match(/^([0-9]( |-)?)?(\(?[0-9]{3}\)?|[0-9]{3})( |-)?([0-9]{3}( |-)?[0-9]{4}|[a-zA-Z0-9]{7})$/)) {
       document.getElementById('error-phone').classList.remove('hide');
       document.getElementById('phone').classList.add('shakeError');
-      setTimeout(function() {
+      setTimeout(function () {
         document.getElementById('phone').classList.remove('shakeError');
       }, 300);
       validated = false;
@@ -221,7 +221,7 @@ function validateUserProfile() {
     gtag("event", "question_8", {
       "event_label": "Personal Info"
     });
-    buildObj('personalInfo', {'firstName': firstName, 'lastName' : lastName, 'email' : email, 'phone' : phone});
+    buildObj('personalInfo', { 'firstName': firstName, 'lastName': lastName, 'email': email, 'phone': phone });
     fbq('track', 'Lead');
     document.getElementById("videoContainer").innerHTML = '<iframe allow="autoplay" src="https://player.vimeo.com/video/341475870?autoplay=1" frameborder="0"></iframe>';
     window.location = `#slider-9`;
@@ -253,6 +253,7 @@ var obj = {
     email: undefined,
     phone: undefined
   },
+  gclid: undefined,
   lead_source: urlSearch.get("utm_content") // change this
 }
 
@@ -280,45 +281,85 @@ document.getElementById('street-address').onfocus = function () {
 /// all the map functionality
 function setAutoComplete() {
   var map, marker;
-      map = new google.maps.Map(document.getElementById('map'), {
-          center: {
-              lat: 39.783809,
-              lng: -102.057222
-          },
-          zoom: 3,
-          mapTypeId: "satellite"
-      });
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 39.783809,
+      lng: -102.057222
+    },
+    zoom: 3,
+    mapTypeId: "satellite"
+  });
 
-      marker = new google.maps.Marker({
-          position: {
-              lat: 39.783809,
-              lng: -102.057222
-          },
-          draggable: true,
-          animation: google.maps.Animation.BOUNCE,
-          map: map,
-          title: 'ADDRESS'
-      });
+  marker = new google.maps.Marker({
+    position: {
+      lat: 39.783809,
+      lng: -102.057222
+    },
+    draggable: true,
+    animation: google.maps.Animation.BOUNCE,
+    map: map,
+    title: 'ADDRESS'
+  });
 
-      var input = document.getElementById('street-address');
-      var autocomplete = new google.maps.places.Autocomplete(input);
-      autocomplete.bindTo('bounds', map);
-      autocomplete.setFields(
-          ['address_components', 'geometry']);
+  var input = document.getElementById('street-address');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+  autocomplete.setFields(
+    ['address_components', 'geometry']);
 
-      google.maps.event.addListener(autocomplete, 'place_changed', function () {
-          place = autocomplete.getPlace();
-          document.getElementById('hide-map').classList.remove('hide');
-          if (place.geometry.viewport) {
-              map.fitBounds(place.geometry.viewport);
-              map.setZoom(20);
-          } else {
-              map.setCenter(place.geometry.location);
-              map.setZoom(20);
-          }
-          buildObj('coordinates',place.geometry.viewport);
+  google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    place = autocomplete.getPlace();
+    document.getElementById('hide-map').classList.remove('hide');
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+      map.setZoom(20);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(20);
+    }
+    buildObj('coordinates', place.geometry.viewport);
 
-          marker.setPosition(place.geometry.location);
-          marker.setVisible(true);
-      });
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+  });
 }
+
+/*
+ * Functions to capture lead gclid 
+ */
+function getParam(p) {
+  const match = RegExp('[?&]' + p + '=([^&]*)').exec(window.location.search);
+  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function getExpiryRecord(value) {
+  const expiryPeriod = 90 * 24 * 60 * 60 * 1000; // 90 day expiry in milliseconds
+
+  const expiryDate = new Date().getTime() + expiryPeriod;
+  return {
+    value: value,
+    expiryDate: expiryDate
+  };
+}
+
+function addGclid() {
+  const gclidParam = getParam('gclid');
+  const gclsrcParam = getParam('gclsrc');
+  const isGclsrcValid = !gclsrcParam || gclsrcParam.indexOf('aw') !== -1;
+
+  let gclidRecord = null;
+
+  if (gclidParam && isGclsrcValid) {
+    gclidRecord = getExpiryRecord(gclidParam);
+    localStorage.setItem('gclid', JSON.stringify(gclidRecord));
+  }
+
+  const gclid = gclidRecord || JSON.parse(localStorage.getItem('gclid'));
+  const isGclidValid = gclid && new Date().getTime() < gclid.expiryDate;
+
+  if (isGclidValid) {
+    buildObj('gclid', gclid.value);
+  }
+}
+
+window.addEventListener('load', addGclid);
