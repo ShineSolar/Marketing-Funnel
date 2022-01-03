@@ -767,6 +767,28 @@ section {
                         text-indent: 15px;
                         width: 500px;
                     }
+
+                    .sms-consent-container {
+                        padding: 10px;
+                        max-width: 500px;
+                        margin-top: 30px;
+                        font-size: 16px;
+                        color: #425563;
+                        font-family: Arial, Helvetica, sans-serif;
+  
+                        a {
+                          color: blue;
+                          text-decoration: underline;
+                        }
+  
+                        .sms-consent {
+                          min-width: 0 !important;
+                          width: auto;
+                          margin: auto;
+                          height: auto;
+                        }
+                    }
+
                 }
             }
 
