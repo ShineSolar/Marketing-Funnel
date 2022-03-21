@@ -44,8 +44,7 @@ function createGECObj(leadDataObj) {
                 case 'phone number':
                 case 'phone_number':
                 case 'phonenumber':
-                    const formattedNum = formatPhoneNumber(objToAdjust[key]);
-                    googleObj['phone_number'] = formattedNum;
+                    googleObj['phone_number'] = formatPhoneNumber(leadDataObj[key]);
                     break;
                 // if the key in the global object is containing the value for the address
                 case 'address':
