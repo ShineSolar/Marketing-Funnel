@@ -1,5 +1,15 @@
 // create Google Enhanced Conversions Obj
 
+function formatPhoneNumber(phoneNumberString) {
+    let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      let intlCode = '+1';
+      return [intlCode, match[2], match[3], match[4]].join('');
+    }
+    return null;
+}
+
 function createGECObj(leadDataObj) {
     // object to send google
     const googleObj = { address: { country: 'US' } };
@@ -34,7 +44,8 @@ function createGECObj(leadDataObj) {
                 case 'phone number':
                 case 'phone_number':
                 case 'phonenumber':
-                    googleObj['phone_number'] = leadDataObj[key];
+                    const formattedNum = formatPhoneNumber(objToAdjust[key]);
+                    googleObj['phone_number'] = formattedNum;
                     break;
                 // if the key in the global object is containing the value for the address
                 case 'address':
@@ -59,4 +70,4 @@ function createGECObj(leadDataObj) {
     }
 
     return googleObj;
-}   
+}
