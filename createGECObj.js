@@ -1,5 +1,14 @@
 // create Google Enhanced Conversions Obj
 
+// loop through obj and send not null or not undefined values
+// HAS TO BE AN EMAIL, if no email.... what to do? Ask brad
+// phone number needs to be full 10 digits with no symbols, except in front we need +1 --> Ex) '+15555555555'
+// prefer first name and last name to be first character upper case and rest lower case
+// region is state, full state or two letter --> Ex) AR or Arkansas
+// postal code needs to full 5 digit code
+// country capital --> US <-- Hardcode this
+
+
 function formatPhoneNumber(phoneNumberString) {
     let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
     let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
