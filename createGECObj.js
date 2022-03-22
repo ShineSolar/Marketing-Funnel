@@ -73,6 +73,7 @@ function createGECObj(leadDataObj) {
                 case 'zip':
                 case 'zip_code':
                 case 'zipcode':
+                case 'leadzip':
                     if (leadDataObj[key] === "") { break; };
                     googleObj['postal_code'] = leadDataObj[key];
                     break;
