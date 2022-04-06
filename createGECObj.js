@@ -30,26 +30,26 @@ function createGECObj(leadDataObj) {
             let lowerCaseKey = key.toLowerCase();
             switch(lowerCaseKey) {
                 // if the key in the global object is containing the value for the first name
-                case 'firstname':
-                case 'first_name':
-                case 'first name':
-                    if (leadDataObj[key] === "") { break; };
-                    googleObj['address']['first_name'] = leadDataObj[key];
-                    break;
+                // case 'firstname':
+                // case 'first_name':
+                // case 'first name':
+                //     if (leadDataObj[key] === "") { break; };
+                //     googleObj['"address"']['first_name'] = leadDataObj[key];
+                //     break;
                 // if the key in the global object is containing the value for the last name
-                case 'lastname':
-                case 'last_name':
-                case 'last name':
-                    if (leadDataObj[key] === "") { break; };
-                    googleObj['address']['last_name'] = leadDataObj[key];
-                    break;
+                // case 'lastname':
+                // case 'last_name':
+                // case 'last name':
+                //     if (leadDataObj[key] === "") { break; };
+                //     googleObj['"address"']['last_name'] = leadDataObj[key];
+                //     break;
                 // if the key in the global object is containing the value for the email
                 case 'email':
                 case 'email address':
                 case 'emailaddress':
                 case 'email_address':
                     if (leadDataObj[key] === "") { break; };
-                    googleObj['email'] = leadDataObj[key];
+                    googleObj['"email"'] = leadDataObj[key];
                     break;
                 // if the key in the global object is containing the value for the phone number
                 case 'phone':
@@ -57,26 +57,26 @@ function createGECObj(leadDataObj) {
                 case 'phone_number':
                 case 'phonenumber':
                     if (leadDataObj[key] === "") { break; };
-                    googleObj['phone_number'] = formatPhoneNumber(leadDataObj[key]);
+                    googleObj['"phone_number"'] = formatPhoneNumber(leadDataObj[key]);
                     break;
                 // if the key in the global object is containing the value for the address
-                case 'address':
-                    if (leadDataObj[key] === "") { break; };
-                    const street = leadDataObj[key].split(",")[0].trim();
-                    const city = leadDataObj[key].split(",")[1].trim();
-                    const state = leadDataObj[key].split(",")[2].trim();
-                    googleObj['address']['street'] = street;
-                    googleObj['address']['city'] = city;
-                    googleObj['address']['region'] = state;
-                    break;
+                // case 'address':
+                //     if (leadDataObj[key] === "") { break; };
+                //     const street = leadDataObj[key].split(",")[0].trim();
+                //     const city = leadDataObj[key].split(",")[1].trim();
+                //     const state = leadDataObj[key].split(",")[2].trim();
+                //     googleObj['"address"']['street'] = street;
+                //     googleObj['"address"']['city'] = city;
+                //     googleObj['"address"']['region'] = state;
+                //     break;
                 // if the key in the global object is containing the value for the zip code
-                case 'zip':
-                case 'zip_code':
-                case 'zipcode':
-                case 'leadzip':
-                    if (leadDataObj[key] === "") { break; };
-                    googleObj['postal_code'] = leadDataObj[key];
-                    break;
+                // case 'zip':
+                // case 'zip_code':
+                // case 'zipcode':
+                // case 'leadzip':
+                //     if (leadDataObj[key] === "") { break; };
+                //     googleObj['"postal_code"'] = leadDataObj[key];
+                //     break;
                 // else, just break the switch statement
                 default:
                     break;
