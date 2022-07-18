@@ -262,7 +262,7 @@ function buildObj(prop, value) {
 }
 
 function updateDatabase() {
-  gtag("event", "converted");
+  gtag('event', 'conversion', { 'send_to': 'AW-854221497/G0WeCMjDic0DELnFqZcD' });
   var server = new XMLHttpRequest();
   server.open('POST', 'https://hooks.zapier.com/hooks/catch/1681335/orq93em/silent/');
   server.send(JSON.stringify(obj));
